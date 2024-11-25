@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login V1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="/static/img/icons/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <meta name="robots" content="noindex, follow">
+</head>
+<body>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <span class="login100-form-title">Sistem Informasi UTM</span>
+                <img src="/static/img/img-01.png" alt="IMG">
+            </div>
+            <form class="login100-form validate-form" id="loginForm">
+                <span class="login100-form-title">Login to Your Account</span>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="email" id="email" placeholder="Email" required>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="password" name="password" id="password" placeholder="Password" required>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="container-login100-form-btn">
+                    <button type="button" class="login100-form-btn" onclick="handleLogin()">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="/static/vendor/bootstrap/js/popper.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/vendor/select2/select2.min.js"></script>
+<script src="/static/vendor/tilt/tilt.jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<script>
+    // Data pengguna untuk validasi
+    const users = {
+        'akredsi@gmail.com': '1234',
+        'user2': 'password2'
+    };
+
+    function handleLogin() {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        // Validasi user
+        if (users[email] && users[email] === password) {
+            // Simpan data di sessionStorage
+            sessionStorage.setItem('email', email);
+            sessionStorage.setItem('password', password);
+
+            // Tampilkan pesan sukses dan redirect
+            Toastify({
+                text: "Login berhasil!",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+            }).showToast();
+
+            setTimeout(() => {
+                window.location.href = "/index.html"; // Ubah ke URL halaman index
+            }, 2000);
+        } else {
+            // Tampilkan pesan error
+            Toastify({
+                text: "Email atau password salah!",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+            }).showToast();
+        }
+    }
+
+    // Tilt effect
+    $('.js-tilt').tilt({ scale: 1.1 });
+</script>
+</body>
+</html>
